@@ -13,7 +13,7 @@ pwm = PWM(0x40, debug=True)
 
 servoMin = 150  # Min pulse length out of 4096
 servoMax = 600  # Max pulse length out of 4096
-
+y = "yes"
 def setServoPulse(channel, pulse):
   pulseLength = 1000000                   # 1,000,000 us per second
   pulseLength /= 60                       # 60 Hz
@@ -25,31 +25,16 @@ def setServoPulse(channel, pulse):
   pwm.setPWM(channel, 0, pulse)
 
 pwm.setPWMFreq(60)                        # Set frequency to 60 Hz
-while (True):
+
+while y != "no":
   # oldcomment Change speed of continuous servo on channel O
-  pwm.setPWM(0, 0, servoMin)
-  time.sleep(1)
-  pwm.setPWM(0, 0, servoMax)
-  time.sleep(1)
-  pwm.setPWM(1, 0, servoMin)
-  time.sleep(1)
-  pwm.setPWM(1, 0, servoMax)
-  time.sleep(1)
-  pwm.setPWM(2, 0, servoMin)
-  time.sleep(1)
-  pwm.setPWM(2, 0, servoMax)
-  time.sleep(1)
-  pwm.setPWM(6, 0, servoMin)
-  time.sleep(1)
-  pwm.setPWM(6, 0, servoMax)
-  time.sleep(1)
-  pwm.setPWM(10, 0, servoMin)
-  time.sleep(1)
-  pwm.setPWM(10, 0, servoMax)
-  time.sleep(1)
-  pwm.setPWM(11, 0, servoMin)
-  time.sleep(1)
-  pwm.setPWM(11, 0, servoMax)
-  time.sleep(1)
-
-
+  m = raw_input("Now what? >>")
+  if m == "min":
+    pwm.setPWM(1, 0, servoMin)
+    time.sleep(.5)
+  elif m == "max":
+    pwm.setPWM(1, 0, servoMax)
+    time.sleep(.5)
+  else:
+    y = "no"
+    print "murder she wrote"    
