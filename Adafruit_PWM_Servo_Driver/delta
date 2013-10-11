@@ -1,4 +1,4 @@
-#p!/usr/bin/python
+#!/usr/bin/python
 
 from Adafruit_PWM_Servo_Driver import PWM
 import time
@@ -9,7 +9,7 @@ import time
 
 # Initialise the PWM device using the default address.
 # bmp = PWM(0x40, debug=True)
-pwm = PWM(0x40, debug=True
+pwm = PWM(0x40, debug=True)
 
 servoMin = 150  # Min pulse length out of 4096
 servoMinn = 1  # Min pulse length out of 4096
@@ -19,7 +19,6 @@ servoMaxx = 740
 servoMaxxx = 760 
 y = "yes"
 m = 375
-
 
 def setServoPulse(channel, pulse):
   pulseLength = 1000000                   # 1,000,000 us per second
@@ -33,24 +32,47 @@ def setServoPulse(channel, pulse):
 
 pwm.setPWMFreq(60)                        # Set frequency to 60 Hz
 
-while y != "no":
-print ">>>> M value is: ", m
-s = int(raw_input(">>> Which Servo? >> "))
-if s == 2:
+def tap():
+  pwm.setPWM(2, 0, 300)	
   pwm.setPWM(2, 0, 400)
   pwm.setPWM(2, 0, 300)
 
- 
-    if m != "stop" and int(m) > 149 and int(m) < 601:
-      pwm.setPWM(s, 0, m) 
-    elif int(m) < 150:
-      m = 151
-      pwm.setPWM(s, 0, m) 
-    elif int(m) > 600:
-      m = 600
-      pwm.setPWM(s, 0, m) 
-    else:
-      y = "no"
-      print "murder she wrote"   
 
-# END OF FILE 
+  pwm.setPWM(1, 0, 375)
+  time.sleep(.5)
+  pwm.setPWM(2, 0, 300)
+while y != "no":
+  print ">>>> M value is: ", m
+  m = raw_input("   Now what? >> ")
+  if m != "stop" and int(m) > 149 and int(m) < 601:
+    pwm.setPWM(1, 0, int(m))
+    time.sleep(.5)
+    pwm.setPWM(2, 0, 300)	
+    time.sleep(.5)
+    pwm.setPWM(2, 0, 450)
+    time.sleep(.5)
+    pwm.setPWM(2, 0, 300)
+  elif int(m) < 150:
+    m = 150
+    pwm.setPWM(1, 0, int(m))
+    time.sleep(.5)
+    pwm.setPWM(2, 0, 300)	
+    time.sleep(.5)
+    pwm.setPWM(2, 0, 450)
+    time.sleep(.5)
+    pwm.setPWM(2, 0, 300)
+  elif int(m) > 600:
+    m = 600
+    pwm.setPWM(1, 0, int(m))
+    time.sleep(.5)
+    pwm.setPWM(2, 0, 300)	
+    time.sleep(.5)
+    pwm.setPWM(2, 0, 400)
+    time.sleep(.5)
+    pwm.setPWM(2, 0, 300)
+  else:
+    y = "no"
+    print "murder she wrote"   
+
+# END OF FILE
+
