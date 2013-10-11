@@ -36,16 +36,18 @@ pwm.setPWMFreq(60)                        # Set frequency to 60 Hz
 while y != "no":
   # oldcomment Change speed of continuous servo on channel O
   pwm.setPWM(1, 0, int(m))
+  pwm.setPWM(2, 0, int(m))
   print ">>>> M value is: ", m
-  m = raw_input("Now what? >> ")
+  s = raw_input(">>> Which Servo? >> ")
+  m = raw_input(">>> Where? >> ")
   if m != "stop" and int(m) > 149 and int(m) < 601:
-    pwm.setPWM(1, 0, int(m))
+    pwm.setPWM(int(s), 0, int(m)) 
   elif int(m) < 150:
-    m = 150
-    pwm.setPWM(1, 0, int(m))
+    m = 151
+    pwm.setPWM(int(s), 0, int(m)) 
   elif int(m) > 600:
     m = 600
-    pwm.setPWM(1, 0, int(m)) 
+    pwm.setPWM(int(s), 0, int(m)) 
   else:
     y = "no"
     print "murder she wrote"   

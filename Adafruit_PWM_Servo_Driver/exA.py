@@ -39,9 +39,10 @@ for i in range(15, 60):
   time.sleep(.5)
   print ".......", m
   m = m + 1
-for i in range(60, 15):
-  i = i * 10
+for i in range(-60, -15):
+  i = i * -10
   pwm.setPWM(1, 0, int(i))
   time.sleep(.5)
   print ".......", m
-  m = m + 1
+  m = m - 1
+ 

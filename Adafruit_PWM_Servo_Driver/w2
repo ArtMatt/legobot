@@ -37,9 +37,9 @@ while y != "no":
   # oldcomment Change speed of continuous servo on channel O
   m = raw_input("Now what? >>")
   if m != "stop":
-    if m < 600
+    if m < 600:
       m = 600
-    elif m > 150
+    elif m > 150:
       m = 150
     pwm.setPWM(1, 0, int(m))
 #  elif m == "0":
